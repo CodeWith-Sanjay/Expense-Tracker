@@ -19,7 +19,8 @@ const TransactionForm = ({setTransaction} : TransactionFormProps ) => {
         id: null,
         title: '',
         amount: null,
-        type: 'income'
+        type: 'Income',
+        date: ''
     });
 
     const animation = 'transition-all duration-300 ease-in-out';
@@ -65,9 +66,12 @@ const TransactionForm = ({setTransaction} : TransactionFormProps ) => {
 
         if(newErrors.title || newErrors.amount || newErrors.type) return;
 
+        const date = new Date().toLocaleString()
+
         const newTransaction: Transaction = {
             ...formData,
-            id: Date.now()
+            id: Date.now(),
+            date
         }
 
         setTransaction(prev => [...prev, newTransaction])
@@ -79,7 +83,8 @@ const TransactionForm = ({setTransaction} : TransactionFormProps ) => {
             id: null,
             title: '',
             amount: null,
-            type: 'income'
+            type: 'Income',
+            date: ''
         })
     } 
 
@@ -87,7 +92,7 @@ const TransactionForm = ({setTransaction} : TransactionFormProps ) => {
   return (
     <form
     onSubmit={handleFormSubmit}
-    className={`flex flex-col gap-4 p-5 border border-orange-500 rounded-sm shadow-orange-300 shadow-md ${animation}`}>
+    className={`mx-2 flex flex-col gap-4 p-5 border border-orange-500 rounded-sm shadow-orange-300 shadow-md ${animation}`}>
         <input 
         className={`p-2 border rounded-sm outline-0 text-gray-500 w-full hover:text-orange-500 hover:border-orange-500 hover:shadow-orange-300 hover:shadow-md ${animation}`}
         type='text'
