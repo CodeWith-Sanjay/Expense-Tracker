@@ -13,12 +13,12 @@ function App() {
   return (
     <div className="flex flex-col text-center items-center justify-center min-h-screen w-full ">
 
-      <h1 className="text-3xl font-semibold text-orange-500 my-5">Expense Tracker</h1>
+      <h1 className="text-4xl font-semibold text-orange-500 py-6 leading-11">Expense Tracker</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 items-start justify-center gap-5 my-4">
+      <div className="grid sm:grid-cols-2 items-start justify-center gap-5 my-4 md:w-full md:max-w-3xl px-4">
         <TransactionForm setTransaction={setTransactions} />
         <SummaryCards />
-        <Transactions />
+        <Transactions transactions={transactions} setTransaction={setTransactions}/>
       </div>
     </div>
   )
