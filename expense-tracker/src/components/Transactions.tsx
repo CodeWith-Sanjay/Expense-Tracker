@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import type {Transaction} from '../types/Transaction';
 
@@ -6,17 +6,23 @@ import FilterButton from './FilterButton';
 
 type TransactionProps = {
   transactions: Transaction[],
-  setTransaction: React.Dispatch<React.SetStateAction<Transaction[]>>
+  filterTransactions: Transaction[],
+  setFilterTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>
 }
 
-const Transactions = ({transactions, setTransaction}: TransactionProps) => {
+const Transactions = ({transactions, filterTransactions, setFilterTransactions}: TransactionProps) => {
 
   const animation = 'transition-all duration-300 ease-in-out';
 
+  useEffect(() => {
+    setFilterTransactions(transactions);
+  }, [transactions])
+
   const handleTransactionDelete = (id: number) => {
-    setTransaction((prev) => (
-      prev.filter((transaction) => transaction.id !== id)
-    ))
+    setFilterTransactions((prev) => (
+      prev.filter((transaction => transaction.id !== id))
+    )
+    )
     console.log('Transaction Deleted');
   }
 
@@ -25,14 +31,14 @@ const Transactions = ({transactions, setTransaction}: TransactionProps) => {
 
       <div className='flex justify-between p-5 items-center'>
       <h1 className='text-2xl font-semibold text-orange-500 text-left'>Transactions</h1>
-      <FilterButton setTransaction={setTransaction} transactions={transactions}/>
+      <FilterButton transactions={transactions} setFilterTransactions={setFilterTransactions}/>
       </div>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-4 my-3 max-h-64 overflow-y-auto'>
-        {transactions.length > 0 
-        ? transactions.map((transaction) => (
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 p-4 my-3 max-h-56 overflow-y-auto'>
+        {filterTransactions.length > 0 
+        ? filterTransactions.map((transaction) => (
           <div 
-          className={`w-56 border border-orange-400 rounded-md p-4 items-start gap-2 shadow-md hover:shadow-orange-500 ${animation}`}
+          className={`w-56 border border-orange-400 rounded-md p-2 items-start gap-2 shadow-md hover:shadow-orange-500 ${animation}`}
           key={transaction.id}>
             <h1 className='pb-1 font-bold text-left text-xl text-orange-500 '>{transaction.title}</h1>
             <div className='flex justify-between gap-5 py-2'>
