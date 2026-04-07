@@ -17,8 +17,8 @@ function App() {
 
       <div className="grid sm:grid-cols-2 items-start justify-center gap-5 my-4 md:w-full md:max-w-3xl px-4">
         <TransactionForm setTransaction={setTransactions} />
-        <SummaryCards />
-        <Transactions transactions={transactions} setTransaction={setTransactions}/>
+        <SummaryCards transactions={transactions}/>
+        <Transactions transactions={transactions} filterTransactions={filterTransactions} setFilterTransactions={setFilterTransactions}/>
       </div>
     </div>
   )

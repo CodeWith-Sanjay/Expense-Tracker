@@ -33,7 +33,7 @@ const TransactionForm = ({setTransaction} : TransactionFormProps ) => {
             [name]:name === 'amount' 
                 ? Number(value)
                 : name === 'type'
-                ? (value as 'income' | 'expense')
+                ? (value as 'Income' | 'Expense')
                 : value
         }))
     }
@@ -114,8 +114,8 @@ const TransactionForm = ({setTransaction} : TransactionFormProps ) => {
         name='type'
         onChange={handleInputChange}
         value={formData.type}>
-            <option value='income'>Income</option>
-            <option value='expense'>Expense</option>
+            <option value='Income'>Income</option>
+            <option value='Expense'>Expense</option>
         </select>
 
         <button 
